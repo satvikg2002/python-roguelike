@@ -4,6 +4,7 @@ import tcod.event
 
 from actions import Action, EscapeAction, MovementAction
 
+
 # send event to proper method
 class EventHandler(tcod.event.EventDispatch[Action]):
     def ev_quit(self, event: tcod.event.Quit) -> Optional[Action]:
