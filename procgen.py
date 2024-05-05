@@ -51,7 +51,7 @@ def tunnel_between(
 
     if random.random() < 0.5:   # 50% chance
         # move horizontally, then vertically
-        corner_x, corner_y = x2, y2
+        corner_x, corner_y = x2, y1
     else:
         # move vertically, then horizontally
         corner_x, corner_y = x1, y2
