@@ -74,7 +74,16 @@ class Actor(Entity):
         ai_cls: Type[BaseAI],
         fighter: Fighter   
     ):
-        self.ai = Optional[BaseAI] = ai_cls[self]
+        super().__init__(
+            x=x,
+            y=y,
+            char=char,
+            color=color,
+            name=name,
+            blocks_movement=True,
+        )
+
+        self.ai: Optional[BaseAI] = ai_cls(self)
 
         self.fighter = fighter
         self.fighter.entity = self
