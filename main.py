@@ -1,4 +1,4 @@
-#!usr/bin/env python
+#!/usr/bin/env python3
 import copy
 
 import tcod
@@ -21,7 +21,6 @@ def main() -> None:
 
     max_monsters_per_room = 2
 
-    # loading set of letters
     tileset = tcod.tileset.load_tilesheet(
         "source.png", 32, 8, tcod.tileset.CHARMAP_TCOD
     )
@@ -39,22 +38,19 @@ def main() -> None:
         max_monsters_per_room=max_monsters_per_room,
         engine=engine,
     )
-    engine.update_fov
+    engine.update_fov()
 
-    # set up terminal
     with tcod.context.new_terminal(
         screen_width,
         screen_height,
         tileset=tileset,
-        title="Python Roguelike",
-        vsync=True
+        title="Yet Another Roguelike Tutorial",
+        vsync=True,
     ) as context:
-        
-        root_console = tcod.console.Console(screen_width, screen_width, order="F")
-
-        # game loop
+        root_console = tcod.Console(screen_width, screen_height, order="F")
         while True:
             engine.render(console=root_console, context=context)
+
             engine.event_handler.handle_events()
 
 

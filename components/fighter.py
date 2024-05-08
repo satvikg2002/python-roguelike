@@ -6,7 +6,6 @@ from components.base_component import BaseComponent
 from input_handlers import GameOverEventHandler
 from render_order import RenderOrder
 
-
 if TYPE_CHECKING:
     from entity import Actor
 

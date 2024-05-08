@@ -8,7 +8,6 @@ from tcod.map import compute_fov
 
 from input_handlers import MainGameEventHandler
 
-
 if TYPE_CHECKING:
     from entity import Actor
     from game_map import GameMap
@@ -23,20 +22,20 @@ class Engine:
         self.player = player
 
     def handle_enemy_turns(self) -> None:
-        for entity in self.game_map.entities - {self.player}:
+        for entity in set(self.game_map.actors) - {self.player}:
             if entity.ai:
                 entity.ai.perform()
 
     def update_fov(self) -> None:
-        """ Recompute the visible area based on the player POV. """
+        """Recompute the visible area based on the players point of view."""
         self.game_map.visible[:] = compute_fov(
-            self.game_map.tiles["transparent"],     # non zero values are transparent
-            (self.player.x, self.player.y),     # pov
-            radius=6,
+            self.game_map.tiles["transparent"],     # non-zero vals are transparent
+            (self.player.x, self.player.y),     # point-of-view
+            radius=8,
         )
-        # if a tile is visible it should be added to explored
+        # If a tile is "visible" it should be added to "explored".
         self.game_map.explored |= self.game_map.visible
-            
+
     def render(self, console: Console, context: Context) -> None:
         self.game_map.render(console)
 

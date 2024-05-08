@@ -4,7 +4,7 @@ from typing import Optional, Tuple, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from engine import Engine
-    from entity import Entity, Actor
+    from entity import Actor, Entity
 
 
 class Action:
@@ -68,19 +68,18 @@ class ActionWithDirection(Action):
 class MeleeAction(ActionWithDirection):
     def perform(self) -> None:
         target = self.target_actor
-
         if not target:
-            return      # no entity to attack
-        
+            return  # No entity to attack.
+
         damage = self.entity.fighter.power - target.fighter.defense
 
         attack_desc = f"{self.entity.name.capitalize()} attacks {target.name}"
         if damage > 0:
             print(f"{attack_desc} for {damage} hit points.")
             target.fighter.hp -= damage
-
         else:
             print(f"{attack_desc} but does no damage.")
+
 
 class MovementAction(ActionWithDirection):
     def perform(self) -> None:

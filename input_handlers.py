@@ -55,7 +55,7 @@ class EventHandler(tcod.event.EventDispatch[Action]):
 
     def handle_events(self) -> None:
         raise NotImplementedError()
-    
+
     def ev_quit(self, event: tcod.event.Quit) -> Optional[Action]:
         raise SystemExit()
 
@@ -72,21 +72,24 @@ class MainGameEventHandler(EventHandler):
 
             self.engine.handle_enemy_turns()
             self.engine.update_fov()  # Update the FOV before the players next action.
-    
+
     def ev_keydown(self, event: tcod.event.KeyDown) -> Optional[Action]:
         action: Optional[Action] = None
-        
+
         key = event.sym
 
         player = self.engine.player
 
         if key in MOVE_KEYS:
             dx, dy = MOVE_KEYS[key]
-            action = BumpAction(player, dx, dy)           
+            action = BumpAction(player, dx, dy)
         elif key in WAIT_KEYS:
             action = WaitAction(player)
 
-        # no valid keypress
+        elif key == tcod.event.KeySym.ESCAPE:
+            action = EscapeAction(player)
+
+        # No valid key was pressed
         return action
     
 
@@ -105,7 +108,7 @@ class GameOverEventHandler(EventHandler):
 
         key = event.sym
 
-        if key == tcod.event.KeySym.ESCAPE:
+        if key == tcod.event.K_ESCAPE:
             action = EscapeAction(self.engine.player)
 
         # No valid key was pressed
