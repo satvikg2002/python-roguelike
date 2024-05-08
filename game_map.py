@@ -17,7 +17,7 @@ if TYPE_CHECKING:
 class GameMap:
     def __init__(
             self, engine: Engine, width: int, height: int, entities: Iterable[Entity] = ()
-            ):
+        ):
         
         self.engine = engine
         self.width, self.height = width, height
@@ -79,6 +79,12 @@ class GameMap:
             default=tile_types.SHROUD,
         )
 
-        for entity in self.entities:
+        entities_sorted_for_rendering = sorted(
+            self.entities, key=lambda x: x.render_order.value
+        )
+
+        for entity in entities_sorted_for_rendering:
            if self.visible[entity.x, entity.y]:
-               console.print(x=entity.x, y=entity.y, string=entity.char, fg=entity.color)
+               console.print(
+                   x=entity.x, y=entity.y, string=entity.char, fg=entity.color
+                )
