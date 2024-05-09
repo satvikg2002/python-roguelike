@@ -2,8 +2,7 @@
 Creating a rogue-like game in Python using the TCOD library. <br>
 The games has a health, action history, dynamic difficulty, leveling, equipment, save/load system with procedurally generated interconnected dungeons.
 
-To install make sure u have python installed, then, run 
-```pip install -r requirements.txt``` 
+To install make sure u have python installed and this repo cloned, then, run ```pip install -r requirements.txt``` after navigating to the source folder.
 
 Depending on your computer you might also need to install [SDL2](https://wiki.libsdl.org/SDL2/Installation)
 
