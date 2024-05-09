@@ -38,7 +38,7 @@ def render_bar(
 
 
 def render_dungeon_level(
-    console: Console, dungeon_level: int, location: Tuple[int, int]
+    console: console.Console, dungeon_level: int, location: Tuple[int, int]
 ) -> None:
     """
     Render the level the player is currently on, at the given location.
